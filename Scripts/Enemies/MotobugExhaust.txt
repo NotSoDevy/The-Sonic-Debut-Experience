@@ -1,0 +1,34 @@
+// ----------------------------------
+// RSDK Project: Sonic 1/Sonic 2
+// Script Description: Motobug Exhaust Object
+// Script Author: Christian Whitehead/Simon Thomley
+// Unpacked by Rubberduckycooly's script unpacker
+// ----------------------------------
+
+//-------Aliases-------//
+private alias 59 : TYPE_MOTOBUGEXHAUST
+
+
+// Static Values
+
+// Tables
+
+event ObjectMain
+
+end event
+
+event ObjectDraw
+
+end event
+
+event ObjectStartup
+
+end event
+
+event RSDKDraw
+
+end event
+
+event RSDKLoad
+
+end event
