@@ -586,7 +586,7 @@ event ObjectStartup
 	SpriteFrame(-36, -76, 81, 88, 83, 90)
 	SpriteFrame(-128, 42, 256, 74, 255, 90) //9 Logo Top
 	SpriteFrame(-128, 112, 256, 74, 255, 167) //10 Logo Bottom
-	SpriteFrame(0, -15, 64, 26, 189, 202) //11 Copyright Sega
+	SpriteFrame(20, -15, 64, 26, 189, 202) //11 Copyright Sega
 	SpriteFrame(0, 0, 1, 1, 189, 202 //12 Team Forever
 
 	temp0 = 208
