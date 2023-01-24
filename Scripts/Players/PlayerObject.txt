@@ -211,6 +211,7 @@ public value PlayerObject_value18 = 0;
 public value PlayerObject_value19 = 0;
 public value achievement.trigger = 0;
 public value debutSonicRoll = 0;
+public value debutHealth = 3;
 
 
 // Tables
@@ -1804,7 +1805,7 @@ function PlayerObject_StartJump
 					object.value10 = ANI_FALL
 				end if
 			end if
-			
+
 			CallFunction(PlayerObject_HandleRollAnimSpd)
 			if object.state == PlayerObject_HandleRoll
 				if saved.Jumplock == 1
@@ -2509,7 +2510,8 @@ function PlayerObject_StartKnuxGlide
 end function
 
 
-function PlayerObject_HandleGround	
+function PlayerObject_HandleGround
+	debutSonicRoll = 0
 	if object.animation != ANI_SKIDDING
 		temp7 = 1
 	else
@@ -2903,6 +2905,13 @@ function PlayerObject_HandleAir
 				player.skidding = 0
 			end if
 		end if
+		if inputPress.buttonA == 1 // DEBUT ROLL HOLY SHIT
+		 if stage.playerListPos == 0
+		   if debutSonicRoll == 0
+		       debutSonicRoll = 1
+		       object.animation = ANI_JUMPING
+		       PlaySfx(SfxName[Release],0)
+		end if
 end function
 
 
@@ -2933,6 +2942,7 @@ function PlayerObject_HandleRoll
 			CallFunction(PlayerObject_StartJump)
 		end if
 	end if
+	debutSonicRoll = 1
 end function
 
 
@@ -4384,12 +4394,9 @@ function PlayerObject_Hurt
 			temp3++
 			temp2 += 32
 		loop
-		ringExtraLife = 100
-		if stage.debugMode == 0
-			saveRAM[997] = 0
-		end if
-		break
-	case 3
+		debutHealth--
+		// -- Debut Health Check --
+		if debutHealth == 0
 		player.sortedDrawOrder = 6
 		object.speed = 0
 		object.yvel = -0x70000
@@ -4411,6 +4418,26 @@ function PlayerObject_Hurt
 			object[+playerCount].propertyValue = 3
 		end if
 		object[+playerCount].type = TypeName[Blank Object]
+		end if
+		// -- Debut Health Check --
+		ringExtraLife = 100
+		if stage.debugMode == 0
+			saveRAM[997] = 0
+		end if
+		break
+	case 3
+		object.state = PlayerObject_Knockback
+		object.animation = ANI_HURT
+		object.yvel = -0x40000
+		object.gravity = GRAVITY_AIR
+		object.scrollTracking = 1
+		object.tileCollisions = 1
+		player.invulnerable = 120
+		if player.gravityValue == 0x1000
+			object.speed >>= 1
+			object.yvel >>= 1
+		end if
+		debutHealth--
 		break
 	end switch
 end function
@@ -5325,6 +5352,8 @@ event ObjectStartup
 		PlayerObject_value1 = 0
 		PlayerObject_value2 = 0
 		PlayerObject_value3 = 0
+		debutSonicRoll = 0
+		debutHealth = 3
 
 
 		switch stage.playerListPos

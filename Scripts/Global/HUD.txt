@@ -281,7 +281,7 @@ function TouchControls
 	if inputDown.Up==1
 		DrawSpriteScreenFX(50,FX_INK,26,151)
 	endif
-	
+
 	temp0 += 45
 	if saved.lives == 1
 		temp0 -= 13
@@ -391,7 +391,7 @@ function HUD_DrawUsual
 	temp2 = 104
 	temp2 += temp5
 	DrawNumbers(0, temp2, 9, player.score, 6, 8, 0)
-	
+
 
 	if saved.Timer == 0
 		temp2 = 67
@@ -407,19 +407,21 @@ function HUD_DrawUsual
 		DrawNumbers(0, temp2, 25, display.milliSeconds, 2, 8, 1)
 		DrawNumbers(0, temp2, 41, object[0].value0, 3, 8, 0)
 	end if
-	
+
 	temp2 = 80
 	temp2 += temp5
 	DrawNumbers(0, temp2, 25, display.seconds, 2, 8, 1)
 	temp2 -= 24
 	DrawNumbers(0, temp2, 25, display.minutes, 10, 8, 0)
-	
+	temp2 = 100
+
+
 
 	if stage.debugMode == 1
 		CallFunction(DebugDisplays)
 		CallFunction(DebugExtra)
 	end if
-	
+  
 	//Lives
 	if saved.lives == 0
 		temp0 = stage.playerListPos
@@ -474,7 +476,7 @@ function HUD_DrawUsual
 		else
 			DrawSpriteScreenXY(20, 38, 226)
 		end if
-		
+
 		temp2 += 18
 
 		if saved.mobile == 1
@@ -483,6 +485,15 @@ function HUD_DrawUsual
 			DrawNumbers(24, 56, 224, player.lives, 2, 8, 0)
 		end if
 	end if
+
+        temp2 += 0
+
+        if saved.mobile == 0
+	DrawNumbers(24, 56, 216, debutHealth, 2, 8, 0)
+	else
+	DrawNumbers(24, temp2, 8, debutHealth, 2, 8, 0)
+	end if
+
 end function
 
 function HUD_DrawTimeAttack
@@ -616,7 +627,7 @@ function HUD_DrawArcadeMode
 	DrawNumbers(0, temp2, 9, player.score, 6, 8, 0)
 	
 
-	
+
 	if saved.Timer == 0
 		temp2 = 67
 		temp2 += temp5
@@ -637,7 +648,7 @@ function HUD_DrawArcadeMode
 	DrawNumbers(0, temp2, 25, display.seconds, 2, 8, 1)
 	temp2 -= 24
 	DrawNumbers(0, temp2, 25, display.minutes, 10, 8, 0)
-	
+
 	
 	if stage.debugMode == 1
 		CallFunction(DebugDisplays)
