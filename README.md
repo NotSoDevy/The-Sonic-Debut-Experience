@@ -2,7 +2,7 @@
 A Sonic 1 Forever mod where you experience Sonic Debut in RSDK form.
 
 # Credits
-MDTravis - Making the original ROM Hack. 
+MDTravis - Making the original ROM Hack.   
 soupnuts6061 - Recreating the Special Stage from the Sonic 1 prototype.
 
 # Play the original Sonic Debut Hack
