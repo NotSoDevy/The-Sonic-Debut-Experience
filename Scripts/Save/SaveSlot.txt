@@ -1,1 +1,0 @@
-//No script data as the save select was removed.
