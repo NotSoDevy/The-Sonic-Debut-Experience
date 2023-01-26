@@ -210,8 +210,11 @@ public value PlayerObject_value17 = 0;
 public value PlayerObject_value18 = 0;
 public value PlayerObject_value19 = 0;
 public value achievement.trigger = 0;
+
+// Sonic Debut Exclusive Values
 public value debutSonicRoll = 0;
-public value debutHealth = 3;
+public value debutHealth = 5;
+public value victoryFlag = 0;
 
 
 // Tables
@@ -1788,16 +1791,24 @@ function PlayerObject_StartJump
 			end if
 		else
 		        if stage.playerListPos > 0
+		        debutSonicRoll = 0
+		        victoryFlag = 0
 			object.animation = ANI_JUMPING
 			end if
 			if stage.playerListPos == 0
 			   if debutSonicRoll == 0
+			     if victoryFlag == 0
 			object.animation = ANI_BOUNCING
 			player.animationReserve = ANI_BOUNCING
 			end if
 			if stage.playerListPos == 0
 			   if debutSonicRoll == 1
 			object.animation = ANI_JUMPING
+			end if
+			if stage.playerListPos == 0
+			   if victoryFlag == 1
+			object.animation = ANI_HURT
+			player.animationReserve = ANI_HURT
 			end if
 			if stage.playerListPos == 5
 				if saved.AmyMoveset == 1
@@ -2907,7 +2918,8 @@ function PlayerObject_HandleAir
 		end if
 		if inputPress.buttonA == 1 // DEBUT ROLL HOLY SHIT
 		 if stage.playerListPos == 0
-		   if debutSonicRoll == 0
+		   if object.animation == ANI_BOUNCING
+		    if debutSonicRoll == 0
 		       debutSonicRoll = 1
 		       object.animation = ANI_JUMPING
 		       PlaySfx(SfxName[Release],0)
@@ -4420,7 +4432,7 @@ function PlayerObject_Hurt
 		object[+playerCount].type = TypeName[Blank Object]
 		end if
 		// -- Debut Health Check --
-		ringExtraLife = 100
+		ringExtraLife = 50
 		if stage.debugMode == 0
 			saveRAM[997] = 0
 		end if
@@ -5353,7 +5365,14 @@ event ObjectStartup
 		PlayerObject_value2 = 0
 		PlayerObject_value3 = 0
 		debutSonicRoll = 0
-		debutHealth = 3
+		// Check health
+		if debutHealth < 5
+		debutHealth = 5
+		else
+                debutHealth = debutHealth
+                end if
+                //Reset victory flag
+		victoryFlag = 0
 
 
 		switch stage.playerListPos
