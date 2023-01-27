@@ -232,9 +232,7 @@ end event
 
 
 event ObjectDraw
-	if object.animation != 0
 		DrawSpriteFX(object.frame, FX_FLIP, object.xpos, object.ypos)
-	end if
 end event
 
 
