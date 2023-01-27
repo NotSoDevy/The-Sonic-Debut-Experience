@@ -201,7 +201,7 @@ function CheckeredBall_PlayerInteraction
 end function
 
 
-function CheckeredBall_BreakBadnik
+//function CheckeredBall_BreakBadnik
 
 	temp0 = object.xvel
 	temp0 |= object.yvel
