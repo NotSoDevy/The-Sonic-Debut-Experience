@@ -143,14 +143,7 @@ event ObjectMain
 			end if
 			break
 			case 8
-				CallFunction(NoMoreInstashield)
-				currentPlayer = 0
-				object[0].value0 += 50
-				if PlayerObject_SuperState != 1
-					object.type = object[0].type
-					CallFunction(PlayerObject_SuperTransform)
-					object.type = TypeName[Broken Monitor]
-				else
+				debutHealth++
 					if ringPan == 0
 						PlaySfx(SfxName[Ring L], 0)
 						SetSfxAttributes(SfxName[Ring L], -1, -100)
@@ -160,25 +153,6 @@ event ObjectMain
 						SetSfxAttributes(SfxName[Ring R], -1, 100)
 						ringPan = 0
 					end if
-				end if
-				if object[0].value0 > 999
-					object[0].value0 = 999
-				end if
-				if object[0].value0 >= ringExtraLife
-					if options.gameMode < 2
-						if saved.lives == 0
-							player.lives++
-							PlaySfx(SfxName[Life], 0)
-							PauseMusic()
-							ResetObjectEntity(25, TypeName[Music Event], 2, 0, 0)
-							object[25].priority = PRIORITY_ACTIVE
-						end if
-					end if
-					ringExtraLife += 100
-					if ringExtraLife > 300
-						ringExtraLife = 1000
-					end if
-				end if
 				break
 			case 9
 				CallFunction(NoMoreInstashield)
